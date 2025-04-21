@@ -5,5 +5,5 @@ twilio:
 
 frontend:
    url : "http://localhost:5173/"
-encryption :
-   secret : ${SECRET_KEY}
+#encryption :
+#   secret : ${SECRET_KEY}
