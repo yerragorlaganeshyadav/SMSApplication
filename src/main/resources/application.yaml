@@ -1,9 +1,0 @@
-twilio:
-   account_sid : AC13f37ad23f2fbfdf22b90695a54e53a7
-   auth_token : f75dacf8e01920b0cf405b6647cf231f
-   trial_number : +19379143798
-
-frontend:
-   url : "http://localhost:5173/"
-#encryption :
-#   secret : ${SECRET_KEY}
