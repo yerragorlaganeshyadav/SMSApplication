@@ -41,7 +41,7 @@ public class TwilioSMSSender {
             Message.creator(to, from, message).create();
             log.info("Sent OTP SMS to {}", maskMobileNumber(mobileNumber));
         } else {
-            throw new MobileNumberExceptions(HttpStatus.BAD_REQUEST ,"Phone number [" + mobileNumber + "] is invalid");
+            throw new MobileNumberExceptions(HttpStatus.BAD_REQUEST ,"Phone number [" + mobileNumber + "] is invalid, please provide valid mobile number");
         }
     }
 
