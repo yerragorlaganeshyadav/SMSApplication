@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OtpVerificationResponseDTO {
-    private boolean isOTPVerified;
+    private String mobileNumber;
     private String message;
+    private boolean isOTPVerified;
 }

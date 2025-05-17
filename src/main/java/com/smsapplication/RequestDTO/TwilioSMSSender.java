@@ -31,7 +31,13 @@ public class TwilioSMSSender {
 
     public void sendOtpSMS(String mobileNumber) throws Throwable {
         log.info("Sending OTP to your registered mobile number {}", maskMobileNumber(mobileNumber));
-        if (isValidPhoneNumber(mobileNumber)) {
+
+        if (!isValidPhoneNumber(mobileNumber)) {
+            throw new MobileNumberExceptions(HttpStatus.BAD_REQUEST,
+                    "Phone number [" + mobileNumber + "] is invalid, please provide a valid mobile number");
+        }
+
+        try {
             String otp = otpService.generateAndStoreOTP(mobileNumber);
             String message = String.format(Constants.MESSAGE, otp);
 
@@ -40,10 +46,13 @@ public class TwilioSMSSender {
 
             Message.creator(to, from, message).create();
             log.info("Sent OTP SMS to {}", maskMobileNumber(mobileNumber));
-        } else {
-            throw new MobileNumberExceptions(HttpStatus.BAD_REQUEST ,"Phone number [" + mobileNumber + "] is invalid, please provide valid mobile number");
+        } catch (Exception e) {
+            log.error("Failed to send OTP to {}: {}", mobileNumber, e.getMessage());
+            throw new MobileNumberExceptions(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Failed to send OTP to mobile number [" + mobileNumber + "]", e.getMessage());
         }
     }
+
 
     private boolean isValidPhoneNumber(String phoneNumber) {
         return phoneNumber != null && phoneNumber.matches("^\\+\\d{10,15}$");

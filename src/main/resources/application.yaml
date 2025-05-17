@@ -1,0 +1,10 @@
+twilio:
+  account_sid : ${ACCOUNT_SID}
+  auth_token : ${AUTH_TOKEN}
+  trial_number : ${TRIAL_NUMBER}
+
+encryption :
+   secret : ${SECRET_KEY}
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
